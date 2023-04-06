@@ -118,13 +118,26 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        heightTextField.setEnabled(true);
         String actionCommand = e.getActionCommand();
         switch (actionCommand) {
-            case "Rectangle" -> paintPanel.setCurrentShape(ShapeType.RECTANGLE);
-            case "Square" -> paintPanel.setCurrentShape(ShapeType.SQUARE);
-            case "Oval" -> paintPanel.setCurrentShape(ShapeType.OVAL);
-            case "Circle" -> paintPanel.setCurrentShape(ShapeType.CIRCLE);
-            case "Triangle" -> paintPanel.setCurrentShape(ShapeType.TRIANGLE);
+            case "Rectangle" -> {
+                paintPanel.setCurrentShape(ShapeType.RECTANGLE);
+            }
+            case "Square" -> {
+                paintPanel.setCurrentShape(ShapeType.SQUARE);
+                heightTextField.setEnabled(false);
+            }
+            case "Oval" -> {
+                paintPanel.setCurrentShape(ShapeType.OVAL);
+            }
+            case "Circle" -> {
+                paintPanel.setCurrentShape(ShapeType.CIRCLE);
+                heightTextField.setEnabled(false);
+            }
+            case "Triangle" -> {
+                paintPanel.setCurrentShape(ShapeType.TRIANGLE);
+            }
             case "Red" -> paintPanel.setCurrentColor("#FF0000");
             case "Yellow" -> paintPanel.setCurrentColor("#FFFF00");
             case "Green" -> paintPanel.setCurrentColor("#00FF00");
