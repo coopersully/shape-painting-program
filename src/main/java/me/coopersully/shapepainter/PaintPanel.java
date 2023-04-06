@@ -1,22 +1,19 @@
 package me.coopersully.shapepainter;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-
 import me.coopersully.shapepainter.shapes.*;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 public class PaintPanel extends JPanel implements MouseListener, MouseMotionListener {
     protected ArrayList<Shape> shapes = new ArrayList<>();
     protected ShapeType currentShape = ShapeType.RECTANGLE;
     protected String currentColor = "#ff0000";
-    protected int currentWidth = 40;
-    protected int currentHeight = 10;
+    protected int currentWidth = 50;
+    protected int currentHeight = 25;
 
     public PaintPanel() {
         super();

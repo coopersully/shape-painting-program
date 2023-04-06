@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,8 +25,8 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
     protected PaintPanel paintPanel = new PaintPanel();
     protected JTextField widthTextField = new JTextField(5);
     protected JTextField heightTextField = new JTextField(5);
-    protected ButtonGroup shapeButtonGroup = new ButtonGroup();
-    protected ButtonGroup colorButtonGroup = new ButtonGroup();
+    protected ButtonGroup shapeButtonGroup;
+    protected ButtonGroup colorButtonGroup;
 
     public ShapeSwingProgram(String title) {
         super(title);
@@ -35,10 +36,20 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 
+        // Initialize width and height fields with default values
+        widthTextField.setText("50");
+        heightTextField.setText("25");
+
         // Set up top panel with text fields for shape dimensions
         JPanel topPanel = new JPanel(new FlowLayout());
+        JLabel widthLabel = new JLabel("Width");
+        JLabel heightLabel = new JLabel("Height");
+        topPanel.add(widthLabel);
         topPanel.add(widthTextField);
+        topPanel.add(heightLabel);
         topPanel.add(heightTextField);
+        widthTextField.addActionListener(this);
+        heightTextField.addActionListener(this);
         this.add(topPanel, BorderLayout.PAGE_START);
 
         // Create the menu bar
@@ -53,12 +64,15 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
         JMenuItem openMenuItem = new JMenuItem("Open", MenuKeyEvent.VK_O);
         openMenuItem.addActionListener(this);
         fileMenu.add(openMenuItem);
+
         JMenuItem saveMenuItem = new JMenuItem("Save", MenuKeyEvent.VK_S);
         saveMenuItem.addActionListener(this);
         fileMenu.add(saveMenuItem);
+
         JMenuItem saveAsMenuItem = new JMenuItem("Save As...", MenuKeyEvent.VK_A);
         saveAsMenuItem.addActionListener(this);
         fileMenu.add(saveAsMenuItem);
+
         JMenuItem exitMenuItem = new JMenuItem("Exit", MenuKeyEvent.VK_X);
         exitMenuItem.addActionListener(this);
         fileMenu.add(exitMenuItem);
@@ -66,7 +80,7 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
         // Build the shape menu
         JMenu shapeMenu = new JMenu("Shape");
         shapeButtonGroup = new ButtonGroup();
-        String[] shapeNames = {"Rectangle", "Square", "Oval", "Circle", "Triangle"};
+        String[] shapeNames = { "Rectangle", "Square", "Oval", "Circle", "Triangle" };
         for (String shapeName : shapeNames) {
             JRadioButtonMenuItem shapeMenuItem = new JRadioButtonMenuItem(shapeName);
             shapeMenuItem.addActionListener(this);
@@ -116,6 +130,13 @@ public class ShapeSwingProgram extends JFrame implements ActionListener {
             case "Green" -> paintPanel.setCurrentColor("#00FF00");
             case "Black" -> paintPanel.setCurrentColor("#000000");
             case "White" -> paintPanel.setCurrentColor("#FFFFFF");
+            default -> {
+                int width = Integer.parseInt(widthTextField.getText());
+                int height = Integer.parseInt(heightTextField.getText());
+                paintPanel.setCurrentWidth(width);
+                paintPanel.setCurrentHeight(height);
+            }
         }
     }
+
 }
